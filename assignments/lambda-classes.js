@@ -31,6 +31,16 @@ class Instructor extends Person {
     grade(student, subject) {
         return `${student.name} receives a perfect score on ${subject}`;
     }
+    giveScore(student) {
+        let check = Math.floor(Math.random() * 3);
+        if(check > 0) {
+            student.grade += Math.floor(Math.random() * 25);
+            return `${student.name} did great! Your new grade is ${student.grade}`
+        }else {
+            student.grade -= Math.floor(Math.random() * 25);
+            return `${student.name} looks like you struggled a bit. I'm sorry but your new grade is ${student.grade}`
+        }
+    }
 }
 
 // Student Class
@@ -41,6 +51,7 @@ class Student extends Person {
         this.previousBackground = stuAttrs.previousBackground;
         this.className = stuAttrs.className;
         this.favSubjects = stuAttrs.favSubjects;
+        this.grade = stuAttrs.grade;
     }
 
     listsSubjects() {
@@ -53,6 +64,13 @@ class Student extends Person {
 
     sprintChallenge(subject) {
         return `${this.name} has begun sprint challenge on ${subject}`;
+    }
+    graduate() {
+        if(this.grade >= 70) {
+            return `Congrats, you have graduated from ${this.className} with a ${this.grade}%`;
+        }else{
+            return `Sorry but your grade is ${this.grade}. You need to get back to studying`;
+        }
     }
 }
 
@@ -82,7 +100,8 @@ const buddy = new Student({
     location: 'Salt Lake City, UT',
     previousBackground: 'customer Support',
     className: 'WebPT9',
-    favSubjects: ['Javascript', 'HTML', 'CSS']
+    favSubjects: ['Javascript', 'HTML', 'CSS'],
+    grade: 50
 });
 
 const pace = new Instructor({
@@ -110,3 +129,14 @@ console.log(buddy.sprintChallenge('Javascript'));
 console.log(pace.grade(buddy, 'Javascript'));
 console.log(jess.standUp('WebPT9'));
 console.log(jess.debugsCode(buddy, 'React'));
+console.log(jess.grade(buddy, 'HTML'));
+console.log(jess.speak());
+console.log(buddy.grade);
+console.log(jess.giveScore(buddy));
+console.log(jess.giveScore(buddy));
+console.log(jess.giveScore(buddy));
+console.log(jess.giveScore(buddy));
+console.log(jess.giveScore(buddy));
+console.log(jess.giveScore(buddy));
+console.log(jess.giveScore(buddy));
+console.log(buddy.graduate());
